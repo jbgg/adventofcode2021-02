@@ -9,6 +9,30 @@ int cmd_solve2(char *args){
   return 1;
  }
 
+ line_t l;
+ long hpos;
+ long depth;
+ long aim;
+ long res;
+ hpos = 0;
+ depth = 0;
+ aim = 0;
+ while(!input_endq(input)){
+  if(input_readline(input, l)){
+   io_printf("readline failed\r\n");
+   return 1;
+  }
+  if(l->mov == MOV_FORWARD){
+   hpos += l->n;
+   depth += aim * l->n;
+  }else if(l->mov == MOV_DOWN){
+   aim += l->n;
+  }else if(l->mov == MOV_UP){
+   aim -= l->n;
+  }
+ }
+ res = hpos * depth;
+ io_printf("%d\r\n", res);
  return 0;
 }
 
